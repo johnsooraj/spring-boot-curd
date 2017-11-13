@@ -1,5 +1,10 @@
 package com.curdsample.models;
 
-public class Users {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Users {
+	@Id
+	private Long id;
 }
