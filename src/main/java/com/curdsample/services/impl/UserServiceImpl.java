@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.curdsample.services.UserService;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserService userService; 

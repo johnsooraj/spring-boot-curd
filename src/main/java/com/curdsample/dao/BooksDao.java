@@ -1,5 +1,7 @@
 package com.curdsample.dao;
 
-public interface BooksDao {
+import com.curdsample.models.Books;
 
+public interface BooksDao {
+	public Books saveBook(Books books);
 }

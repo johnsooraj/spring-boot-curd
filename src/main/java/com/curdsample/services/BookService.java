@@ -1,9 +1,12 @@
 package com.curdsample.services;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 import com.curdsample.models.Books;
 
-public interface BookService extends JpaRepository<Books, Long>{
+public interface BookService {
 
+	public List<Books> getAllBooks();
+	
+	public Books saveBook(Books books);
 }
