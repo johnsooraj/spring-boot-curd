@@ -25,7 +25,7 @@ public class MasterController {
 	@ResponseBody
 	@RequestMapping(value = "/allBooks", method = RequestMethod.GET)
 	public List<Books> getAllBooks() {
-		saveBook();
+		//saveBook();
 		return null;
 	}
 	
