@@ -37,7 +37,8 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public List<Books> getBookByName(String bookName) {
-		return booksDao.getBookByName(bookName);
+		List<Books> test = booksDao.getBookByName(bookName);
+		return test;
 	}
 	
 }
