@@ -1,13 +1,35 @@
 package com.curdsample.services.impl;
 
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.curdsample.models.User;
+import com.curdsample.repository.RoleRepository;
+import com.curdsample.repository.UsersRepository;
 import com.curdsample.services.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserService userService; 
+	private UsersRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Override
+	public void save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setRoles(new HashSet<>(roleRepository.findAll()));
+		userRepository.save(user);
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
 }

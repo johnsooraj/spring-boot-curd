@@ -17,8 +17,18 @@ public class MasterController {
 		return "redirect:/welcome";
 	}
 
-	@RequestMapping(value = {"/welcome","/home"})
+	@RequestMapping(value = { "/welcome" })
 	public String welcomePage() {
+		return "login";
+	}
+
+	@RequestMapping(value = { "/registration" })
+	public String registrationPage() {
+		return "register";
+	}
+
+	@RequestMapping(value = { "/home" })
+	public String homePage() {
 		return "index";
 	}
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Lockscreen</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/AdminLTE.min.css">
+  <link rel="stylesheet" href="css/skins/_all-skins.min.css">
+</head>
+
+<body class="hold-transition lockscreen">
+  <div class="lockscreen-wrapper">
+    <div class="lockscreen-logo">
+      <a href="../../index2.html">
+        <b>Admin</b>LTE</a>
+    </div>
+    <div class="lockscreen-name">John Doe</div>
+    <div class="lockscreen-item">
+      <div class="lockscreen-image">
+        <img src="css/customImages/one.jpg" alt="User Image">
+      </div>
+      <form class="lockscreen-credentials">
+        <div class="input-group">
+          <input type="password" id="userPassword" class="form-control" placeholder="password">
+          <div class="input-group-btn">
+            <button type="button" id="loginUserBtn" class="btn">
+              <i class="fa fa-arrow-right text-muted"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="help-block text-center">
+      Enter your password to retrieve your session
+    </div>
+    <div class="text-center">
+      <a href="login.html">Or sign in as a different user</a>
+    </div>
+    <div class="lockscreen-footer text-center">
+      Copyright &copy; 2014-2016
+      <b>
+        <a href="http://almsaeedstudio.com" class="text-black">Almsaeed Studio</a>
+      </b>
+      <br> All rights reserved
+    </div>
+  </div>
+  <script type="text/javascript" src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  $('#loginUserBtn').click( function(){
+	  var psw = $('#userPassword').val();
+	  var pswJson = {"password":psw};
+	  $.ajax({
+		  url: '/login',
+	      method: 'post',
+	      data: pswJson,
+	      contentType: 'json',
+	      success: function(data){
+	    	  if(data){
+	    		  alert("success");
+	    	  }
+	      }
+	  });
+  });
+  </script>
+</body>
+</html>

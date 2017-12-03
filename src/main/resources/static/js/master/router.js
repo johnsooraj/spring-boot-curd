@@ -17,6 +17,28 @@ define([
 
   var initialize = function() {
     var app_router = new AppRouter();
+    
+    var saveUnSaveEdit = function(_this) {
+    		  var status = {
+        	    unsavedEdits: false
+        	  };
+        	 
+        	  Backbone.trigger('myapp:navigate', status);
+        	  if (status.unsavedEdits) {
+        		  var confirmed = window.confirm(status.msg || "There are unsaved edits. Continuing will discard these edits.");
+        		  if(confirmed){
+        			  Backbone.trigger('changeFlag', status);
+        			  return true;
+        		  }
+        		  else{
+        			  _this.navigate(status.url, { trigger: false, replace: true });
+        			  return false;
+        		  }
+        	  }else{
+        		  return true;
+        	  }
+	}
+    
     app_router.on("route:Welcome", function(actions) {
       var welcomeView = new WelcomeView();
       welcomeView.render()
@@ -26,8 +48,10 @@ define([
       booksView.render();
     });
     app_router.on("route:AddBook", function(actions) {
-        var addBookView = new AddBookView();
-        addBookView.render();
+    	if(saveUnSaveEdit(this)){
+    		var addBookView = new AddBookView();
+            addBookView.render();
+    	}
     });
     Backbone.history.start();
   };
