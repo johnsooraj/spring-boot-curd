@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.curdsample.models.Citys;
 import com.curdsample.models.User;
 import com.curdsample.security.service.SecurityService;
 import com.curdsample.services.UserService;
@@ -25,7 +28,7 @@ public class UserController {
 	private UserValidator userValidator;
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+	public String registration(@RequestBody User userForm, BindingResult bindingResult, Model model) {
 		userValidator.validate(userForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
@@ -46,6 +49,13 @@ public class UserController {
 		if (logout != null)
 			model.addAttribute("message", "You have been logged out successfully.");
 		return "login";
+	}
+
+	@PostMapping(value = "/user")
+	@ResponseBody
+	public Object saveUserTest(@RequestBody User user) {
+		userService.save(user);
+		return null;
 	}
 
 }

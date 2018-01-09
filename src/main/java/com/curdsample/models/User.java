@@ -7,21 +7,30 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
-	
-	private Long id;
-	private String username;
-	private String password;
-	private String passwordConfirm;
-	private Set<Role> roles;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long userId;
+
+	private String username;
+	private String password;
+
+	@Transient
+	private String passwordConfirm;
+
+	@ManyToMany
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Address address;
+
 	public Long getId() {
-		return id;
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -40,7 +49,6 @@ public class User {
 		this.password = password;
 	}
 
-	@Transient
 	public String getPasswordConfirm() {
 		return passwordConfirm;
 	}
@@ -49,8 +57,6 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 	}
 
-	@ManyToMany
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -58,4 +64,13 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 }

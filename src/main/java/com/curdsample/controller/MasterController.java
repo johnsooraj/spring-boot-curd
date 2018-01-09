@@ -19,7 +19,7 @@ public class MasterController {
 
 	@RequestMapping(value = { "/welcome" })
 	public String welcomePage() {
-		return "login";
+		return "index";
 	}
 
 	@RequestMapping(value = { "/registration" })
