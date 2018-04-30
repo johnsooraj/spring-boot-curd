@@ -1,6 +1,6 @@
 # spring-boot-curd
 
-A Boot Stall Application
+A Boot Stall Application(not finished)
 
 1. View All Books
 2. Search by name
